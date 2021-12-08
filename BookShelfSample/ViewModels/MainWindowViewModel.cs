@@ -1,4 +1,6 @@
-﻿using Prism.Mvvm;
+﻿using BookShelfSample.Model;
+using Prism.Mvvm;
+using System.Collections.Generic;
 
 namespace BookShelfSample.ViewModels
 {
@@ -11,9 +13,16 @@ namespace BookShelfSample.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
+        public List<BookInfo> BookList { get; set; }
+
         public MainWindowViewModel()
         {
-
+            BookList = new List<BookInfo>()
+            {
+                new BookInfo("1984", true),
+                new BookInfo("動物農場"),
+                new BookInfo("すばらしい新世界", true),
+            };
         }
     }
 }
