@@ -11,6 +11,8 @@ namespace BookShelfSample.Model
 
         public string BookName => book.Name;
 
+        public bool HasRead => hasRead;
+
         public BookInfo(string name, bool read=false)
         {
             book = new Book(name);
