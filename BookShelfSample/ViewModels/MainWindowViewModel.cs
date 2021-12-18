@@ -25,35 +25,18 @@ namespace BookShelfSample.ViewModels
 
         private List<BookInfo> books = new List<BookInfo>();
 
+        private BookListDispatcher bookListDispatcher;
+
         public MainWindowViewModel()
         {
-            Dispatcher uiThread = Dispatcher.CurrentDispatcher;
-            BookList = new List<BookInfo>();
-            AddItemToShelf();
-            uiThread.BeginInvoke(() => {
-                BookList = books;
-                Title = $"本の総数：{BookList.Count}冊";
-            });
+            bookListDispatcher = new BookListDispatcher();
+            bookListDispatcher.BookListChanged += BookListCreated;
         }
 
-        public async void AddItemToShelf()
+        private void BookListCreated(object sender, System.EventArgs e)
         {
-            books = new List<BookInfo>();
-            ConcurrentQueue<BookInfo> createdBookQueue = new ConcurrentQueue<BookInfo>();
-            List<Task> tasks = new List<Task>();
-            for (int i = 0; i < 100; i++)
-            {
-                string bookName = $"TaskName{i}";
-                tasks.Add(Task.Run(() => createdBookQueue.Enqueue(new BookInfo(bookName))));
-            }
-
-            await Task.WhenAll(tasks);
-
-            while(createdBookQueue.TryDequeue(out BookInfo book))
-            {
-                books.Add(book);
-            }
-
+            BookList = bookListDispatcher.BookList;
+            Title = $"本の総数：{BookList.Count}";
         }
     }
 }
