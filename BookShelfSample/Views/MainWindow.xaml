@@ -8,14 +8,16 @@
         <ResourceDictionary Source="./BorderTypeDictionary.xaml" />
     </Window.Resources>
     <DockPanel>
-        <ItemsControl ItemsSource="{Binding BookList}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderThickness="1" Margin="4" Style="{StaticResource BorderChange}">
-                        <TextBlock Text="{Binding BookName, Mode=OneTime}" Margin="4" Style="{StaticResource WeightChange}"/>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding BookList, Mode=OneWay}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" Margin="4" Style="{StaticResource BorderChange}">
+                            <TextBlock Text="{Binding BookName, Mode=OneTime}" Margin="4" Style="{StaticResource WeightChange}"/>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </DockPanel>
 </Window>
