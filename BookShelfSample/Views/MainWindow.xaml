@@ -4,15 +4,15 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="300" Width="200" >
+    <Window.Resources>
+        <ResourceDictionary Source="./BorderTypeDictionary.xaml" />
+    </Window.Resources>
     <DockPanel>
         <ItemsControl ItemsSource="{Binding BookList}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <DataTemplate.Resources>
-                        <ResourceDictionary Source="./BorderTypeDictionary.xaml" />
-                    </DataTemplate.Resources>
-                    <Border BorderThickness="1" Margin="4">
-                        <TextBlock Text="{Binding BookName, Mode=OneTime}" Margin="4"/>
+                    <Border BorderThickness="1" Margin="4" Style="{StaticResource BorderChange}">
+                        <TextBlock Text="{Binding BookName, Mode=OneTime}" Margin="4" Style="{StaticResource WeightChange}"/>
                     </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
