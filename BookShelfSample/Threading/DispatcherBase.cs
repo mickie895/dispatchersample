@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Threading;
 
@@ -30,7 +26,8 @@ namespace BookShelfSample.Threading
 
             var thread = new Thread(
                 new ThreadStart(
-                    () => {
+                    () =>
+                    {
                         dispatcher = Dispatcher.CurrentDispatcher;
                         baseDispatcher.BeginInvoke((Action)OnInitiallized);
                         Dispatcher.Run();
