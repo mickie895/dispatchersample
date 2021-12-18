@@ -1,0 +1,23 @@
+﻿<Window x:Class="BookShelfSample.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" Height="300" Width="200" >
+    <Window.Resources>
+        <ResourceDictionary Source="./BorderTypeDictionary.xaml" />
+    </Window.Resources>
+    <DockPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding BookList, Mode=OneWay}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" Margin="4" Style="{StaticResource BorderChange}">
+                            <TextBlock Text="{Binding BookName, Mode=OneTime}" Margin="4" Style="{StaticResource WeightChange}"/>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
+</Window>
