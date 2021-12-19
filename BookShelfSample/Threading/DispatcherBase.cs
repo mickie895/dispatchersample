@@ -15,11 +15,19 @@ namespace BookShelfSample.Threading
         public bool Initiallized => dispatcher != null;
 
         /// <summary>
-        /// Dispatcherの初期化処理
+        /// 初期化処理が行われているスレッドのDispatcherを使って初期化する
         /// </summary>
-        protected DispatcherBase()
+        protected DispatcherBase(): this(Dispatcher.CurrentDispatcher)
         {
-            baseDispatcher = Dispatcher.CurrentDispatcher;
+        }
+
+        /// <summary>
+        /// ベースとなるDispatcher(通常はUIスレッドのもの)を渡して初期化する
+        /// </summary>
+        /// <param name="baseDispatcher">ベースとしたいDispatcher</param>
+        protected DispatcherBase(Dispatcher baseDispatcher)
+        {
+            this.baseDispatcher = baseDispatcher;
 
             baseDispatcher.ShutdownStarted += (s, e) =>
                 dispatcher?.BeginInvokeShutdown(DispatcherPriority.Normal);
